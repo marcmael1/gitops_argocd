@@ -75,27 +75,18 @@ pipeline{
             steps{
                 script{
                     sh ("""
+                    git show-ref
                     git config --global user.name "marcmael1"
                     git config --global user.email "marctchouanche@gmail.com"
                     git add deployment.yml
                     git commit -m "update deployment file to github"
                     """)
-                    withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')]) {
+                    withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')]){
+                        sh "git pull https://github.com/marcmael1/gitops_argocd.git main"
                         sh "git push https://github.com/marcmael1/gitops_argocd.git main"
                     }
                 }
             }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
