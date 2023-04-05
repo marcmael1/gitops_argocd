@@ -28,12 +28,21 @@ pipeline{
             }
         }
 
-        stage('GITHUB'){
+        // stage('GITHUB'){
+        //     steps{
+        //         script{
+        //             git credentialsId: "github-token",
+        //             url: "https://github.com/marcmael1/gitops_argocd.git",
+        //             branch: 'main'
+        //         }
+        //     }
+        // }
+
+
+        stage('BUILD DOCKER IMAGE'){
             steps{
                 script{
-                    git credentialsId: "github-token",
-                    url: "https://github.com/marcmael1/gitops_argocd.git",
-                    branch: 'main'
+                    docker_image = docker.build "${IMAGE_NAME}"
                 }
             }
         }
