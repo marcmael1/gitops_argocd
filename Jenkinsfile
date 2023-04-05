@@ -70,6 +70,22 @@ pipeline{
                 }
             }
         }
+
+        stage('Push the new update deployment file to github'){
+            steps{
+                script{
+                    sh ("""
+                    git config --global user.name "marcmael1"
+                    git config --global user.email "marctchouanche@gmail.com"
+                    git add deployment.yml
+                    git commit -m "update deployment file to github"
+                    """)
+                    withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')]) {
+                        sh "git push https://github.com/marcmael1/gitops_argocd.git main"
+                    }
+                }
+            }
+        }
     }
     post{
         always{
