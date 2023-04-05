@@ -81,7 +81,7 @@ pipeline{
                     git commit -m "update deployment file to github"
                     """)
                     withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')]) {
-                        sh "git push https://github.com/marcmael1/gitops_argocd.git main"
+                        sh "git push https://github.com/marcmael1/gitops_argocd.git master"
                     }
                 }
             }
