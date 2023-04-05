@@ -6,7 +6,7 @@ pipeline{
             steps{
                 echo "========executing CLEANUP WORKSPACE ========"
                 script{
-                    cleanupWs()
+                    cleanWs()
                 }
             }
         }
