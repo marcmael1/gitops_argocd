@@ -31,9 +31,9 @@ pipeline{
         stage('GITHUB'){
             steps{
                 script{
-                    git credentials "github-token",
+                    git credentialsId: "github-token",
                     url: "https://github.com/marcmael1/gitops_argocd.git",
-                    branch 'main'
+                    branch: 'main'
                 }
             }
         }
