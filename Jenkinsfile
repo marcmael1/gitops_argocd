@@ -50,7 +50,7 @@ pipeline{
         stage('PUSH IMAGE TO DOCKERHUB'){
             steps{
                 script{
-                    docker.withRegistry('', 'REGISTERY_CREDS'){
+                    docker.withRegistry('', REGISTERY_CREDS){
                         docker_image.push "${IMAGE_TAG}"
                         docker_image.push "latest"
                     }
